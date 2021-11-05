@@ -3,9 +3,30 @@
     return mod || (0, cb[Object.keys(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
 
+  // src/noteBox.js
+  var require_noteBox = __commonJS({
+    "src/noteBox.js"(exports, module) {
+      var noteBox2 = (data) => {
+        const newPostEl = document.createElement("div");
+        const h = document.createElement("H3");
+        const t = document.createTextNode(data.title);
+        h.appendChild(t);
+        newPostEl.appendChild(h);
+        const p = document.createElement("p");
+        const q = document.createTextNode(data.content);
+        p.appendChild(q);
+        newPostEl.appendChild(p);
+        newPostEl.className = "post";
+        document.body.appendChild(newPostEl);
+      };
+      module.exports = noteBox2;
+    }
+  });
+
   // src/newNote.js
   var require_newNote = __commonJS({
     "src/newNote.js"(exports, module) {
+      var noteBox2 = require_noteBox();
       var newNote2 = (title, content) => {
         fetch("http://localhost:3000/notes", {
           method: "post",
@@ -15,10 +36,7 @@
           body: JSON.stringify({ title, content })
         }).then((response) => response.json()).then((response) => {
           console.log(response);
-          const newPostEl = document.createElement("div");
-          newPostEl.innerText = `${response.content} ${response.title}`;
-          newPostEl.className = "post";
-          document.body.appendChild(newPostEl);
+          noteBox2(response);
         });
       };
       module.exports = newNote2;
@@ -28,14 +46,12 @@
   // src/fetchNotes.js
   var require_fetchNotes = __commonJS({
     "src/fetchNotes.js"(exports, module) {
+      var noteBox2 = require_noteBox();
       var fetchNotes2 = (callback) => {
         fetch("http://localhost:3000/notes").then((response) => response.json()).then((jsonData) => {
           console.log(jsonData);
           jsonData.forEach((key, value) => {
-            const newPostEl = document.createElement("div");
-            newPostEl.innerText = key.content + key.title;
-            newPostEl.className = "post";
-            document.body.appendChild(newPostEl);
+            noteBox2(key);
           });
         });
       };
@@ -60,6 +76,7 @@
   var newNote = require_newNote();
   var fetchNotes = require_fetchNotes();
   var displayNotes = require_displayNotes();
+  var noteBox = require_noteBox();
   var button = document.querySelector("#testButton");
   button.addEventListener("click", () => {
     const title = document.querySelector("#note_title");

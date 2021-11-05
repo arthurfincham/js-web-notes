@@ -1,6 +1,7 @@
 const newNote = require('./src/newNote')
 const fetchNotes = require('./src/fetchNotes')
 const displayNotes = require('./src/displayNotes')
+const noteBox = require('./src/noteBox')
 
 const button = document.querySelector("#testButton")
 

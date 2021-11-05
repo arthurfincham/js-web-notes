@@ -1,3 +1,5 @@
+const noteBox = require("./noteBox");
+
 const newNote = (title, content) => {
   fetch("http://localhost:3000/notes", {
   method: 'post',
@@ -9,10 +11,7 @@ const newNote = (title, content) => {
   .then(response => response.json())
   .then(response => {
     console.log(response);
-    const newPostEl = document.createElement('div');
-    newPostEl.innerText = `${response.content} ${response.title}`
-    newPostEl.className = 'post';
-    document.body.appendChild(newPostEl);
+    noteBox(response);
   });
 }
 
