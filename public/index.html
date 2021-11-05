@@ -5,13 +5,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>notesJS</title>
+  <link rel="stylesheet" type="text/css" href="/public/css/style.css" />
 </head>
 <body>
   <h1>Javascript Notes App</h1>
-  <div id="all_notes"></div>
-  <input type="text" id="note_title">
-  <input type="text" id="note_content">
-  <button type="submit" id="testButton">button</button>
+  <div class="new-note-form">
+    <h3>New Note</h3>
+    <input type="text" id="note_title" placeholder="title">
+    <textarea type="text" id="note_content" placeholder="description"></textarea>
+    <button type="submit" id="testButton">Create</button>
+  </div>
   <script type="text/javascript" src="/public/js/bundle.js" ></script>
 </body>
 </html>
